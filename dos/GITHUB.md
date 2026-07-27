@@ -1,37 +1,37 @@
-# GitHub — DOS
+# GitHub — DOS (under World Builder Studios)
 
-**Remote:** `https://github.com/kitten-lab/dos` (SSH: `git@github.com:kitten-lab/dos.git`)
+**Living desk:** `C:\ALICE_BOX\world-builder-studios\` (company island git root)  
+**Product bay:** `dos/`  
+**Maker:** World Builder Studios
 
-Local tree: `C:\Builds\dos`.
-
-## Auth / CLI
-
-```powershell
-# GitHub CLI (once): winget install --id GitHub.cli -e
-gh auth login
-gh auth status
-```
-
-## Push
+## Company git (local)
 
 ```powershell
-cd C:\Builds\dos
-git push -u origin main
+cd C:\ALICE_BOX\world-builder-studios
+git status
+git log --oneline
 ```
 
-## Optional: rename repo to `dos-again`
-
-If the pun wants a longer slug later:
+Branch: `main`. Birth: company house + DOS with SELF rail.  
+**No `origin` yet.** When Hands says: create under **`chesters-imports`**, not `kitten-lab` (Builds / graveyard country).
 
 ```powershell
-gh repo rename dos-again --yes
-git remote set-url origin git@github.com:kitten-lab/dos-again.git
+# only after Hands greenlights remote
+cd C:\ALICE_BOX\world-builder-studios
+gh repo create chesters-imports/world-builder-studios --private --source=. --remote=origin --push
 ```
 
-Folder can stay `C:\Builds\dos` either way.
+## Archaeology (not the living remote)
+
+| Place | Role |
+|-------|------|
+| `C:\Builds\dos` | Mausoleum · `kitten-lab/dos` · stale pre-SELF tip |
+| `~\.grok\worktrees\builds-dos\dos-digital-office-spaces` | Worktree that held SELF rail (8 commits ahead of mausoleum) |
+
+Do not push living-desk work to `kitten-lab/dos` by habit.
 
 ## Commit hygiene
 
-- Keep `worlds/` and `*.world.db` out of git (see `.gitignore`).
+- Keep `worlds/` and `*.world.db` out of git (see company `.gitignore`).
 - Prefer small, focused commits.
 - Do not force-push `main` unless you mean to rewrite history.
