@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+dist/
+build/
+*.egg
+.venv/
+venv/
+.env
+.python-version
+
+# Test / tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# Local worlds & SQLite (session / office data — never commit until explicitly published)
+worlds/
+backup-worlds/
+*.world.db
+*.world.db-*
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+# Office snapshots may hold real company schedules/dates — never commit
+offices/**/*.office.db
+offices/**/*.world.db
+
+# Editor / session junk
+*.log
+.aidm/
+.dos/

@@ -1,0 +1,25 @@
+[project]
+name = "dos"
+version = "0.1.0"
+description = "DOS (Digital Office Spaces) — collaborative office world builder for humans and agents (TUI-first). DOS, again."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "textual>=0.80.0",
+    "rich>=13.0.0",
+    "prompt_toolkit>=3.0.0",
+]
+
+[project.scripts]
+dos = "dos.cli:main"
+dos-help = "dos.help_cli:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+dos = ["schema.sql"]
