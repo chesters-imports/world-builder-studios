@@ -576,8 +576,12 @@ def _bin_bucket_header(
     lead = " " * max(0, indent)
     if nested:
         lead += "[dim]└─[/dim] "
-    # Solid white bin titles — stand out from dim prime/code trail
-    name_mk = f"[bold bright_white]{fmt.safe(name)}[/bold bright_white]"
+    # Solid white bin titles — clickable in TUI (look at code / name)
+    name_mk = (
+        f"[bold bright_white underline]{fmt.safe(name)}[/bold bright_white underline]"
+    )
+    look_ref = code if code and code != "—" else name
+    name_mk = fmt.click_look(look_ref, name_mk)
     if not bits:
         return f"{lead}{name_mk}"
     trail = " · ".join(bits)
@@ -631,8 +635,15 @@ def _format_ticket_presence_line(
             line += f"{ticket_phase_markup(plain_ph)}{' ' * pad}{gap}"
         else:
             line += f"{' ' * w_phase}{gap}"
+    shown = fmt.show_name(name)
+    pad = max(0, w_name - len(shown))
+    tcol = fmt.kind_color("ticket")
+    ticket_title = (
+        f"[{tcol} underline]{fmt.safe(shown)}[/{tcol} underline]" + (" " * pad)
+    )
+    ticket_title = fmt.click_look(code if code and code != "—" else name, ticket_title)
     line += (
-        f"{fmt.colored_padded_name(name, 'ticket', w_name)}{gap}"
+        f"{ticket_title}{gap}"
         f"{brick_mk}{' ' * brick_pad}{gap}"
         f"[dim]{fmt.safe(fmt.pad_visible(code, w_code))}[/dim]"
     )
@@ -696,12 +707,13 @@ def _format_presence_line(
     gap = "  "
     name, sub, prime, code, color_kind = _presence_row(inst, world=world)
     # name · subtype · prime · code (subtype col omitted when none in the grid)
-    if name_color:
-        shown = fmt.show_name(name)
-        pad = max(0, w_name - len(shown))
-        title = f"[{name_color}]{fmt.safe(shown)}[/{name_color}]" + (" " * pad)
-    else:
-        title = fmt.colored_padded_name(name, color_kind, w_name)
+    # Underline + @click → look at code (TUI); typing still works the same.
+    shown = fmt.show_name(name)
+    pad = max(0, w_name - len(shown))
+    color = name_color or fmt.kind_color(color_kind)
+    title = f"[{color} underline]{fmt.safe(shown)}[/{color} underline]" + (" " * pad)
+    look_ref = code if code and code != "—" else name
+    title = fmt.click_look(look_ref, title)
     line = f"{' ' * indent}{title}{gap}"
     if w_sub > 0:
         line += f"[dim]{fmt.safe(fmt.pad_visible(sub or '', w_sub))}[/dim]{gap}"

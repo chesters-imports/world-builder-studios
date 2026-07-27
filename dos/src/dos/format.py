@@ -230,6 +230,29 @@ def colored_padded_name(name: str, kind: str | None, width: int) -> str:
     return show_name(shown) + (" " * pad)
 
 
+def _action_quote(token: str) -> str:
+    """Quote *token* as a Python string literal for Textual ``@click`` actions."""
+    if "'" not in token:
+        return f"'{token}'"
+    if '"' not in token:
+        return f'"{token}"'
+    return "'" + token.replace("\\", "\\\\").replace("'", "\\'") + "'"
+
+
+def click_look(ref: object, styled: str) -> str:
+    """
+    Make *styled* (already Rich-markup) open ``look at <ref>`` on click in TUI.
+
+    Textual: ``[@click=app.look_at('…')]…[/]``. Empty / dash refs pass through
+    unchanged. Safe for bin headers and presence name columns.
+    """
+    r = str(ref or "").strip()
+    if not r or r in ("—", "-", "…"):
+        return styled
+    q = _action_quote(r)
+    return f"[@click=app.look_at({q})]{styled}[/]"
+
+
 def inner_life_row(
     instance_name: str,
     ven_name: str,

@@ -747,6 +747,13 @@ def run_textual(world: World, world_path: Path) -> None:
             if is_openable_url(u):
                 self.open_url(u)
 
+        def action_look_at(self, ref: str) -> None:
+            """Click a look-list name / bin headline → ``look at <ref>`` as a turn."""
+            r = (ref or "").strip()
+            if not r:
+                return
+            self._run_command_line(f"look at {r}")
+
         # Classic DOS blue: deep blue field, cyan edges, light gray type
         CSS = f"""
         Screen {{
@@ -1451,11 +1458,11 @@ def run_textual(world: World, world_path: Path) -> None:
             if self._self_mode == "home":
                 self._refresh_self_pane()
 
-        def on_input_submitted(self, event: Input.Submitted) -> None:
+        def _run_command_line(self, line: str, *, record_history: bool = True) -> None:
+            """Run one command as a world-log turn (typed or click-generated)."""
             log = self.query_one("#log", SelectableWorldLog)
             cmd = self.query_one("#cmd", HistoryInput)
-            line = event.value.strip()
-            event.input.value = ""
+            line = (line or "").strip()
             if not line:
                 return
 
@@ -1470,7 +1477,8 @@ def run_textual(world: World, world_path: Path) -> None:
 
             ml = parse_multiline_opener(line)
             if ml is not None:
-                cmd.cmd_history.push(line)
+                if record_history:
+                    cmd.cmd_history.push(line)
                 initial = seed_initial_body(world, ml)
                 page_title = seed_page_title(world, ml)
                 screen = make_studio_buffer_screen(
@@ -1516,7 +1524,8 @@ def run_textual(world: World, world_path: Path) -> None:
                 self.push_screen(screen, _on_editor_done)
                 return
 
-            cmd.cmd_history.push(line)
+            if record_history:
+                cmd.cmd_history.push(line)
 
             # Help → raw world log (no side rail)
             help_arg = parse_help_command(line)
@@ -1557,6 +1566,13 @@ def run_textual(world: World, world_path: Path) -> None:
                 )
             if result.quit:
                 self.exit()
+
+        def on_input_submitted(self, event: Input.Submitted) -> None:
+            line = event.value.strip()
+            event.input.value = ""
+            if not line:
+                return
+            self._run_command_line(line)
 
     StudioApp().run()
 
