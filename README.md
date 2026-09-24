@@ -25,7 +25,11 @@ We build **stages you walk into**. Materials from DATBOX may arrive later as imp
 
 | Bay | SKU | Status |
 |-----|-----|--------|
-| [`dos/`](./dos/) | **Digital Office Spaces (DOS)** | Migrated from Builds mausoleum · office collab world builder · TUI-first |
+| [`wbs/`](./wbs/) | **World Builder Studio** | On the island · VEN storypack / stage · studio + play |
+| [`dos/`](./dos/) | **Digital Office Spaces (DOS)** | Office collab cut of the same kernel · TUI-first |
+| [`adm/`](./adm/) | **ADM field papers** | Dreaming, checkout, spawn, timelines. Not a ROM. |
+
+[`wbs/`](./wbs/) is the stage. [`dos/`](./dos/) is a hammer. [`adm/`](./adm/) is the field. AIDM (the being) is not a folder name.
 
 More world builders when the board approves (they might approve fun here — carefully).
 
@@ -43,4 +47,4 @@ Specialized house formats stay honest; the product is the **space**, not a mega 
 ---
 
 *World Builder Studios · ALICE_BOX living desk*  
-*First bay: DOS — Digital Office Spaces*
+*Bays: wbs · dos · adm*

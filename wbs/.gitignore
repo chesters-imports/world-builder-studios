@@ -1,0 +1,76 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+dist/
+build/
+*.egg
+.venv/
+venv/
+.env
+.python-version
+
+# Test / tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# Local worlds & SQLite (player data — never commit until explicitly published)
+worlds/
+*.world.db
+*.world.db-*
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Extensionless playthrough DBs / folders at repo root (SQLite without .db)
+# Add new world basenames here; only remove when you mean to publish them.
+/BSG
+/BSG_Offices
+/Cathedral
+/GENESIS
+/Great_Crossing
+/Imported.To
+/kitten-lab
+/Kitten-Lab
+/Silo
+/SymbolCraft
+/Terminal
+/TESTER
+/BSG/
+/BSG_Offices/
+/Cathedral/
+/GENESIS/
+/Great_Crossing/
+/Imported.To/
+/kitten-lab/
+/Kitten-Lab/
+/Silo/
+/SymbolCraft/
+/Terminal/
+/TESTER/
+
+# Editor / session junk
+*.log
+.aidm/
+backup-worlds/Terminal
+backup-worlds/Silo
+backup-worlds/SBW
+backup-worlds/Sandbox
+backup-worlds/Kitten-Lab
+backup-worlds/Genesis
+backup-worlds/BSG_Offices
