@@ -1,0 +1,25 @@
+[project]
+name = "world-studio"
+version = "0.1.0"
+description = "AIDM World Studio — VEN-based MUD-like multiverse builder"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "textual>=0.80.0",
+    "rich>=13.0.0",
+    "prompt_toolkit>=3.0.0",
+]
+
+[project.scripts]
+world-studio = "world_studio.cli:main"
+world-studio-help = "world_studio.help_cli:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+world_studio = ["schema.sql"]
